@@ -98,7 +98,9 @@ const Project: React.FC = () => {
             {!project.link && (
               <div className="project-placeholder">
                 <HiClock className="placeholder-icon" />
-                <span className="placeholder-text">Still cooking</span>
+                <span className="placeholder-text">
+                  Project being prepared — shared by the end of September 2026
+                </span>
               </div>
             )}
           </div>
@@ -148,7 +150,10 @@ const Project: React.FC = () => {
               <HiClock />
             </div>
             <h3>{cookingProject.name}</h3>
-            <p>This project is still cooking. Check back soon for a live demo.</p>
+            <p>
+              This project is being prepared and will be shared by the end of
+              September 2026.
+            </p>
           </div>
         </div>
       )}

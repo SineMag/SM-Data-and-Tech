@@ -37,6 +37,7 @@ const iconByKey: Record<string, React.ReactElement> = {
   weather: <HiCloud />,
   music: <HiMusicNote />,
   listify: <HiShoppingCart />,
+  owami: <HiFire />,
 };
 
 const ProjectIcon: React.FC<ProjectIconProps> = ({ iconKey, className }) => {
