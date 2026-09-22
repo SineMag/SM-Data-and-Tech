@@ -1,14 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import {
-  HiHome,
-  HiFolder,
-  HiMail,
-  HiChartBar,
-  HiOfficeBuilding,
-  HiInformationCircle,
-  HiDotsVertical,
-} from "react-icons/hi";
+import { HiMenu, HiX, HiCode, HiLightningBolt, HiInformationCircle, HiBriefcase, HiMail } from "react-icons/hi";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { companyNavLinks, companyProfile } from "../data/company";
 
 const Nav: React.FC = () => {
@@ -17,23 +10,22 @@ const Nav: React.FC = () => {
   const navRef = useRef<HTMLDivElement>(null);
 
   const iconByKey = {
-    home: HiHome,
-    services: HiOfficeBuilding,
-    caseStudies: HiFolder,
-    analytics: HiChartBar,
+    home: HiCode,
+    projects: HiBriefcase,
+    hackend: HiLightningBolt,
     about: HiInformationCircle,
+    experience: HiBriefcase,
     contact: HiMail,
   };
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen((current) => !current);
   };
 
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(event.target as Node)) {
@@ -50,46 +42,58 @@ const Nav: React.FC = () => {
     };
   }, [isMenuOpen]);
 
-  // Close menu when route changes
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
 
   return (
-    <nav className="nav" ref={navRef}>
+    <nav className="portfolio-nav" ref={navRef}>
       <div className="nav-content">
-        <Link to="/" className="nav-logo signature" onClick={closeMenu}>
+        <Link to="/" className="nav-logo" onClick={closeMenu}>
           {companyProfile.shortName}
         </Link>
 
-        {/* Hamburger Menu Button */}
         <button
           className="hamburger-menu"
           onClick={toggleMenu}
           aria-label="Toggle menu"
           aria-expanded={isMenuOpen}
         >
-          <HiDotsVertical />
+          {isMenuOpen ? <HiX /> : <HiMenu />}
         </button>
 
-        {/* Navigation Links */}
         <ul className={`nav-links ${isMenuOpen ? "nav-open" : ""}`}>
           {companyNavLinks.map((link) => {
             const Icon = iconByKey[link.iconKey];
-            const isActive = location.pathname === link.path;
+            const isActive = location.pathname === "/" && link.path.startsWith("#")
+              ? location.hash === link.path
+              : location.pathname === link.path;
+
             return (
               <li key={link.path}>
-                <Link
-                  to={link.path}
-                  className={isActive ? "active" : ""}
-                  onClick={closeMenu}
-                >
+                <a href={link.path} className={isActive ? "active" : ""} onClick={closeMenu}>
                   <Icon className="nav-icon" />
                   <span>{link.name}</span>
-                </Link>
+                </a>
               </li>
             );
           })}
+
+          {companyProfile.github && (
+            <li className="nav-social-item">
+              <a href={companyProfile.github} target="_blank" rel="noreferrer noopener" aria-label="GitHub" onClick={closeMenu}>
+                <FaGithub />
+              </a>
+            </li>
+          )}
+
+          {companyProfile.linkedin && (
+            <li className="nav-social-item">
+              <a href={companyProfile.linkedin} target="_blank" rel="noreferrer noopener" aria-label="LinkedIn" onClick={closeMenu}>
+                <FaLinkedin />
+              </a>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

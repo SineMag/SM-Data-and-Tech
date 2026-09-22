@@ -1,162 +1,101 @@
-import React, { useEffect, useState } from "react";
-import { projects } from "../data/projects";
-import { HiCode, HiClock } from "react-icons/hi";
-import type { Project as ProjectType } from "../data/projects";
-import ProjectIcon from "../components/ProjectIcon";
+import React from "react";
+import { companyProfile } from "../data/company";
+
+const projectArchive = [
+  {
+    name: "OWAMI",
+    status: "BUILDING",
+    type: "AI-powered cooking ecosystem",
+    summary:
+      "A personal product direction focused on personalised cooking, ingredient-aware recommendations, food image understanding, voice interaction, and an AI-assisted kitchen experience.",
+    stack: ["React Native", "TypeScript", "Node.js", "PostgreSQL", "AI", "Voice"],
+    accent: "orange",
+  },
+  {
+    name: "SYNCLET",
+    status: "PROTOTYPE",
+    type: "Connected safety & response",
+    summary:
+      "A concept exploring connected devices, rapid response logic, anomaly detection, emergency escalation, and location-aware safety workflows.",
+    stack: ["IoT", "AI", "Cloud", "UX", "Prototype"],
+    accent: "gold",
+  },
+  {
+    name: "NALIMA",
+    status: "CONCEPT",
+    type: "AI for agriculture",
+    summary:
+      "An agri-tech exploration around crop and soil image assessment, readiness guidance, and data-informed decision support for farming contexts.",
+    stack: ["AI", "Computer Vision", "Agriculture", "Data"],
+    accent: "earth",
+  },
+  {
+    name: "NALA9",
+    status: "EXPERIMENT",
+    type: "Voice-first desktop assistant",
+    summary:
+      "An exploration into voice-driven developer workflows, desktop automation, and reducing friction for repetitive tasks through natural commands.",
+    stack: ["Voice AI", "Developer Tools", "Automation", "Product"],
+    accent: "charcoal",
+  },
+  {
+    name: "Q-Health Care & Triage",
+    status: "PROTOTYPE",
+    type: "AI-assisted care triage concept",
+    summary:
+      "A software prototype exploring AI-assisted patient triage workflows, record summarisation and structured care-response support in a healthcare context.",
+    stack: ["React", "Node.js", "Python", "AI", "Healthcare"],
+    accent: "slate",
+  },
+];
 
 const Project: React.FC = () => {
-  const githubUrl = import.meta.env.VITE_GITHUB || "https://github.com/SineMag";
-  const [cookingProject, setCookingProject] = useState<ProjectType | null>(null);
-
-  const handleCardClick = (project: ProjectType) => {
-    if (project.link) {
-      window.open(project.link, "_blank", "noopener,noreferrer");
-      return;
-    }
-    setCookingProject(project);
-  };
-
-  useEffect(() => {
-    const handleEsc = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setCookingProject(null);
-      }
-    };
-
-    window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
-  }, []);
-
   return (
-    <div className="dashboard-container">
-      <div className="dashboard-header">
-        <h1
-          style={{
-            color: "#000000",
-            fontSize: "2.5rem",
-          }}
-        >
-          Case Studies
-        </h1>
-        <p style={{ color: "#000000", marginTop: "1rem" }}>
-          Selected software delivery examples across web, mobile, and data
-          products.
-        </p>
-      </div>
-      <div className="projects-grid">
-        {projects.map((project, index) => (
-          <div
-            key={index}
-            className={`dashboard-card project-card-clickable ${!project.link ? "project-card-cooking" : ""}`}
-            onClick={() => handleCardClick(project)}
-          >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: "1rem",
-                gap: "1rem",
-              }}
-            >
-              <h3
-                style={{
-                  color: "#000000",
-                  margin: 0,
-                  flex: 1,
-                  minWidth: 0,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.6rem",
-                }}
-              >
-                <ProjectIcon iconKey={project.iconKey} />
-                <span>{project.name}</span>
-              </h3>
-              <span className={`project-status ${project.status}`}>
-                {project.status === "live" && (
-                  <span className="live-dot"></span>
-                )}
-              </span>
-            </div>
-            <p
-              style={{
-                color: "#000000",
-                marginBottom: "1rem",
-                lineHeight: "1.6",
-              }}
-            >
-              {project.description}
-            </p>
-            <div className="tech-tags" style={{ marginBottom: "1rem" }}>
-              {project.tech.map((tech, techIndex) => (
-                <span key={techIndex} className="tech-tag">
-                  {tech}
-                </span>
-              ))}
-            </div>
-            {!project.link && (
-              <div className="project-placeholder">
-                <HiClock className="placeholder-icon" />
-                <span className="placeholder-text">
-                  Project being prepared — shared by the end of September 2026
-                </span>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-      <div style={{ textAlign: "center", marginTop: "3rem" }}>
-        <a
-          href={githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.5rem",
-          }}
-        >
-          <HiCode />
-          <span>View Company GitHub</span>
-        </a>
-      </div>
-
-      {cookingProject && (
-        <div
-          className="cooking-modal-overlay"
-          onClick={() => setCookingProject(null)}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(event) => {
-            if (event.key === "Enter" || event.key === " ") {
-              setCookingProject(null);
-            }
-          }}
-        >
-          <div
-            className="cooking-modal"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <button
-              className="cooking-modal-close"
-              onClick={() => setCookingProject(null)}
-              aria-label="Close modal"
-            >
-              x
-            </button>
-            <div className="cooking-gif-like" aria-hidden="true">
-              <HiClock />
-            </div>
-            <h3>{cookingProject.name}</h3>
-            <p>
-              This project is being prepared and will be shared by the end of
-              September 2026.
-            </p>
-          </div>
+    <div className="portfolio-page">
+      <section className="portfolio-section">
+        <div className="section-header">
+          <h2>Case studies</h2>
+          <p>Selected product work across AI, software, data and rapid prototyping.</p>
         </div>
-      )}
+
+        <div className="project-grid">
+          {projectArchive.map((project) => (
+            <article key={project.name} className={`project-card accent-${project.accent}`}>
+              <div className="project-card-header">
+                <div>
+                  <span className="project-code">{project.name}</span>
+                  <h3>{project.name}</h3>
+                </div>
+                <span className="status-label">{project.status}</span>
+              </div>
+
+              <p className="feature-subtitle">{project.type}</p>
+              <p>{project.summary}</p>
+
+              <div className="project-meta-row">
+                {project.stack.map((item) => (
+                  <span key={`${project.name}-${item}`} className="meta-badge">
+                    {item}
+                  </span>
+                ))}
+              </div>
+
+              <div className="project-visual" />
+            </article>
+          ))}
+        </div>
+
+        <div style={{ marginTop: "2rem", textAlign: "center" }}>
+          <a
+            href={companyProfile.github}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="primary-btn"
+          >
+            VIEW GITHUB
+          </a>
+        </div>
+      </section>
     </div>
   );
 };

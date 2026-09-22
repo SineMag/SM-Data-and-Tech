@@ -1,54 +1,54 @@
 export type CompanyNavLink = {
   name: string;
   path: string;
-  iconKey: "home" | "services" | "caseStudies" | "analytics" | "about" | "contact";
+  iconKey: "home" | "projects" | "hackend" | "about" | "experience" | "contact";
 };
 
 export const companyProfile = {
-  name: "SineMag Solutions",
-  shortName: "SMS",
-  tagline: "Build. Launch. Scale.",
+  name: "Sinenhlanhla Magubane",
+  shortName: "SINENHLANHLA",
+  role: "Software Developer • AI Builder • Data Enthusiast",
+  tagline: "BUILDING SOFTWARE. EXPLORING AI. SHIPPING IDEAS.",
   email: import.meta.env.VITE_EMAIL || "",
-  github: import.meta.env.VITE_GITHUB || "",
+  github: import.meta.env.VITE_GITHUB || "https://github.com/SineMag",
   linkedin: import.meta.env.VITE_LINKEDIN || "",
 };
 
 export const companyNavLinks: CompanyNavLink[] = [
-  { name: "Home", path: "/", iconKey: "home" },
-  { name: "Services", path: "/services", iconKey: "services" },
-  { name: "Case Studies", path: "/case-studies", iconKey: "caseStudies" },
-  { name: "Analytics", path: "/data-analytics", iconKey: "analytics" },
-  { name: "About", path: "/about", iconKey: "about" },
-  { name: "Contact", path: "/contact", iconKey: "contact" },
+  { name: "Projects", path: "#projects", iconKey: "projects" },
+  { name: "Hackend Lab", path: "#hackend-lab", iconKey: "hackend" },
+  { name: "About", path: "#about", iconKey: "about" },
+  { name: "Experience", path: "#experience", iconKey: "experience" },
+  { name: "Contact", path: "#contact", iconKey: "contact" },
 ];
 
 export const serviceCards = [
   {
-    title: "Web App Development",
+    title: "Full-stack product building",
     description:
-      "Custom, scalable business web applications with modern UI and reliable backend APIs.",
+      "From interface to backend, I like building complete product experiences that feel useful from day one.",
   },
   {
-    title: "Mobile App Development",
+    title: "AI-powered experiences",
     description:
-      "Cross-platform mobile experiences using React Native for fast delivery and strong UX.",
+      "I explore AI interfaces, agents, automation and practical workflows that reduce friction for users.",
   },
   {
-    title: "Data & Analytics Solutions",
+    title: "Data-driven experimentation",
     description:
-      "Dashboards and reporting pipelines that transform raw data into decision-ready insights.",
+      "I work across data, product thinking and experimentation to uncover useful patterns and prototypes.",
   },
   {
-    title: "API & Backend Engineering",
+    title: "Hackathon product sprints",
     description:
-      "Secure backend services, integrations, and database design built for performance and growth.",
+      "I use fast, constrained builds to turn ideas into working prototypes and learn through shipping.",
   },
 ];
 
 export const processSteps = [
-  "Discover",
-  "Plan",
+  "Ideate",
+  "Prototype",
   "Build",
-  "Launch",
-  "Support",
+  "Test",
+  "Ship",
 ];

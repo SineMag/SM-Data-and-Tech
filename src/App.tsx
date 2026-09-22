@@ -1,4 +1,5 @@
 import './App.css';
+import './styles/portfolio.css';
 import './styles/Dashboard.css';
 import { Routes, Route } from 'react-router-dom'
 import Nav from './components/Nav'
@@ -16,7 +17,7 @@ import About from './pages/About';
 
 function App() {
   return (
-    <div>
+    <div className="app-shell">
       <Nav />
       <main className="site-main">
         <GlobalDecor />
@@ -35,7 +36,7 @@ function App() {
           </Routes>
         </div>
       </main>
-      <div className="watermark">SMS</div>
+      <div className="watermark">SM</div>
       <Footer />
     </div>
   )
